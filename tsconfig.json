@@ -1,17 +1,64 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "checkJs": false,
+    "incremental": true,
+    "importHelpers": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "react-native",
+    "module": "es2022",
+    "moduleResolution": "node",
     "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@src/*": ["./src/*"],
+      "@tests/*": ["./tests/*"],
+      "@assets/*": ["./assets/*"]
     }
   },
+  "extends": "expo/tsconfig.base",
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "typeRoots": ["./node_modules/@types", "./global.d.ts"],
   "include": [
+    "env.js",
+    "App.ts",
     "**/*.ts",
     "**/*.tsx",
+    "./.storybook/",
+    "expo-env.d.ts",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "./global.d.ts"
+  ],
+  "exclude": [
+    "docs",
+    "ios",
+    "cli",
+    "android",
+    "test/**/*",
+    "node_modules",
+    "expo-env.d.ts",
+    "babel.config.js",
+    "metro.config.js",
+    "node_modules/**/*",
+    "lint-staged.config.js"
   ]
 }
