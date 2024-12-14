@@ -1,7 +1,8 @@
-import { View,Image,Text,StyleSheet } from "react-native";
+import { View,Image,Text,StyleSheet, Pressable } from "react-native";
 import { typography } from "../constants/typography";
 import { spacing } from "../constants/Spacing";
 import { radius } from "../constants/Radius";
+import { Link } from "expo-router";
 
 export interface ProductListItemProps{
   id: number;
@@ -12,7 +13,8 @@ export interface ProductListItemProps{
 
 export const ProductListItem: React.FC<{ product: ProductListItemProps }> = ({ product }) => {
   return (
-    <View style={styles.container}>
+    <Link href={`/menu/${product.id}`} asChild>
+    <Pressable style={styles.container}>
     <Image source={{
       uri:`${product.image}`
       
@@ -27,7 +29,8 @@ export const ProductListItem: React.FC<{ product: ProductListItemProps }> = ({ p
       <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.price}>{product.price}</Text>
     </View>
-    </View>
+    </Pressable>
+    </Link>
   )
 }
 
@@ -35,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     maxWidth:'50%',
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor:'grey',
     alignItems: 'center',
     padding:spacing.sm,
