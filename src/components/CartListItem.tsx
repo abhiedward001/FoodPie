@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
 import React from 'react';
-import Colors from '../constants/Colors';
 import { CartItem } from '../types';
+import Colors from '../constants/Colors';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
+import { radius } from '../constants/Radius';
+import { spacing } from '../constants/Spacing';
 import { FontAwesome } from '@expo/vector-icons';
 import { useCartContext } from '../contexts/cart-provider';
 
@@ -22,7 +24,7 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
       <View style={{ flex: 1 }}>
         <Text style={styles.title}>{cartItem.product.name}</Text>
         <View style={styles.subtitleContainer}>
-          <Text style={styles.price}>${cartItem.product.price.toFixed(2)}</Text>
+          <Text style={styles.price}>₹{cartItem.product.price.toFixed(2)}</Text>
           <Text>Size: {cartItem.size}</Text>
         </View>
       </View>
@@ -48,27 +50,28 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 5,
     flex: 1,
+    padding: spacing.sm,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: radius.xl,
+    marginVertical: spacing.xxs,
   },
   image: {
     width: 75,
     aspectRatio: 1,
     alignSelf: 'center',
-    marginRight: 10,
+    marginRight: spacing.sm,
   },
   title: {
-    fontWeight: '500',
     fontSize: 16,
-    marginBottom: 5,
+    fontWeight: '500',
+    marginBottom: spacing.xxs,
   },
   subtitleContainer: {
-    flexDirection: 'row',
     gap: 5,
+    flexDirection: 'row',
   },
   quantitySelector: {
     flexDirection: 'row',
@@ -77,12 +80,12 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   quantity: {
-    fontWeight: '500',
     fontSize: 18,
+    fontWeight: '500',
   },
   price: {
-    color: Colors.light.tint,
     fontWeight: 'bold',
+    color: Colors.light.tint,
   },
 });
 

@@ -3,10 +3,10 @@ import 'react-native-reanimated';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import CartProvider from '../contexts/cart-provider';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useColorScheme } from '../components/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import CartProvider from '../contexts/cart-provider';
 
 export {
   // Catch any errors thrown by the Layout component.

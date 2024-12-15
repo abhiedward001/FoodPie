@@ -1,12 +1,13 @@
 import React from 'react';
+import { useRouter } from 'expo-router';
 import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
 
 import { Product } from '../types';
 import Button from '@/src/components/button';
+import { colors } from '../constants/Colors';
 import { spacing } from '../constants/Spacing';
-import { colors } from '@/src/constants/Colors';
+import { typography } from '../constants/typography';
 import { useCartContext } from '../contexts/cart-provider';
-import { useRouter } from 'expo-router';
 
 const pizzaSizeArray = ['Sm', 'Md', 'Lg', 'Xl'];
 
@@ -19,14 +20,17 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({ data }) => {
   const [selectedSize, setSelectedSize] = React.useState('Md');
 
   return (
-    <>
-      <Image
-        source={{
-          uri: `${data?.image?.toString()}`,
-        }}
-        style={styles.image}
-      />
-
+    <View style={styles.container}>
+      <>
+        <Image
+          source={{
+            uri: `${data?.image?.toString()}`,
+          }}
+          resizeMode="contain"
+          style={styles.image}
+        />
+        <Text style={styles.price}>Price: ₹{data?.price.toFixed(2)}</Text>
+      </>
       <View style={styles.pizzaSizesContainer}>
         {pizzaSizeArray.map((eachPizzaSize, index) => {
           return (
@@ -54,7 +58,6 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({ data }) => {
         })}
       </View>
 
-      <Text style={styles.price}>Price: ₹{data?.price.toFixed(2)}</Text>
       <Button
         onPress={() => {
           addItems(data!, selectedSize);
@@ -62,7 +65,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({ data }) => {
         }}
         text="Add to cart"
       />
-    </>
+    </View>
   );
 };
 
@@ -71,13 +74,15 @@ export default ProductDescription;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: spacing.sm,
+    justifyContent: 'space-between',
   },
   image: {
     width: '100%',
     aspectRatio: 1,
+    // borderWidth: 1,
   },
   pizzaSizesContainer: {
+    // borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -91,8 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.palette.grey200,
   },
   price: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 'auto',
+    fontSize: typography.size.md.fontSize,
+    fontFamily: typography.fonts.interFont.bold,
   },
 });

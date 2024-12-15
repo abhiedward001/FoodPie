@@ -4,11 +4,13 @@ import { createContext, PropsWithChildren, useContext } from 'react';
 import { CartItem, Product } from '../types';
 
 export interface CartProps {
+  totalAmount: number;
   items: CartItem[];
   addItems: (product: Product, size: string) => void;
   updateItems: (itemId: string, quantity: -1 | 1) => void;
 }
 const CartContext = createContext<CartProps>({
+  totalAmount: 0,
   items: [],
   addItems: () => {},
   updateItems: () => {},
@@ -52,8 +54,12 @@ const CartProvider = ({ children }: PropsWithChildren) => {
     setCartItems(updatedItems);
   };
 
+  const totalAmount = cartItems.reduce(
+    (sum, item) => (sum += item.product.price * item.quantity),
+    0,
+  );
   return (
-    <CartContext.Provider value={{ items: cartItems, addItems, updateItems }}>
+    <CartContext.Provider value={{ items: cartItems, addItems, updateItems, totalAmount }}>
       {children}
     </CartContext.Provider>
   );
