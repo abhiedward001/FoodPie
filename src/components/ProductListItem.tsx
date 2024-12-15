@@ -1,9 +1,10 @@
+import { Link, useSegments } from 'expo-router';
 import { View, Image, Text, StyleSheet, Pressable } from 'react-native';
-import { typography } from '../constants/typography';
-import { spacing } from '../constants/Spacing';
+
 import { radius } from '../constants/Radius';
-import { Link } from 'expo-router';
 import { colors } from '../constants/Colors';
+import { spacing } from '../constants/Spacing';
+import { typography } from '../constants/typography';
 
 export interface ProductListItemProps {
   id: number;
@@ -13,8 +14,10 @@ export interface ProductListItemProps {
 }
 
 export const ProductListItem: React.FC<{ product: ProductListItemProps }> = ({ product }) => {
+  const segments = useSegments();
+  console.log('@@segments', segments);
   return (
-    <Link href={`/menu/${product.id}`} asChild>
+    <Link href={`../${segments[0]}/menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
         <Image
           source={{

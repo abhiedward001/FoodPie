@@ -17,7 +17,7 @@ export interface ProductDescriptionProps {
 const ProductDescription: React.FC<ProductDescriptionProps> = ({ data }) => {
   const router = useRouter();
   const { addItems } = useCartContext();
-  const [selectedSize, setSelectedSize] = React.useState('Md');
+  // const [selectedSize, setSelectedSize] = React.useState('Md');
 
   return (
     <View style={styles.container}>
@@ -31,7 +31,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({ data }) => {
         />
         <Text style={styles.price}>Price: ₹{data?.price.toFixed(2)}</Text>
       </>
-      <View style={styles.pizzaSizesContainer}>
+      {/* <View style={styles.pizzaSizesContainer}>
         {pizzaSizeArray.map((eachPizzaSize, index) => {
           return (
             <Pressable
@@ -56,7 +56,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({ data }) => {
             </Pressable>
           );
         })}
-      </View>
+      </View> */}
 
       <Button
         onPress={() => {
